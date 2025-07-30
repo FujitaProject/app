@@ -1,0 +1,195 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 2em;
+  display: flex; /* Use flexbox for centering */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Full viewport height */
+}
+
+.screen {
+  display: none;
+  background: white;
+  padding: 2em;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px; /* Limit screen width */
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.screen:not(.hidden) {
+  display: block;
+}
+
+h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 1.2em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Character Screens */
+.character-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 400px; /* Ensure sufficient height */
+}
+
+.character-display {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.character-image {
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%; /* Example: circular image */
+  border: 2px solid #ddd;
+}
+
+.status {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+.dialogue-area {
+  background: #eee;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: left;
+  min-height: 80px; /* Ensure space for dialogue */
+  position: relative;
+}
+
+.dialogue-area p {
+  margin: 0;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.dialogue-area button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  margin: 0;
+  padding: 8px 15px;
+  font-size: 1em;
+}
+
+/* Quiz Screen */
+.question-area {
+  margin-bottom: 20px;
+}
+
+#question-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+}
+
+#options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#options button {
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: left;
+}
+
+#options button.selected {
+  background-color: #a8d8ff; /* Highlight selected option */
+  border-color: #007bff;
+}
+
+/* Result Screen */
+.result-animation-container {
+  overflow: hidden; /* Hide overflow for animations */
+}
+
+.battle-animation {
+  width: 100%;
+  height: 150px; /* Space for animation */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 20px;
+}
+
+/* Animation for correct answer */
+.battle-animation.attack-success {
+  background-image: url('https://via.placeholder.com/200/00FF00/FFFFFF?text=ATTACK!'); /* Example success image */
+  animation: attackEffect 0.5s ease-out forwards;
+}
+
+/* Animation for incorrect answer */
+.battle-animation.damage-taken {
+  background-image: url('https://via.placeholder.com/200/FF0000/FFFFFF?text=DAMAGE!'); /* Example damage image */
+  animation: damageEffect 0.5s ease-out forwards;
+}
+
+@keyframes attackEffect {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0; }
+}
+
+@keyframes damageEffect {
+  0% { background-color: transparent; }
+  25% { background-color: rgba(255, 0, 0, 0.3); }
+  50% { background-color: rgba(255, 0, 0, 0.6); transform: translateX(5px); }
+  75% { background-color: rgba(255, 0, 0, 0.3); transform: translateX(-5px); }
+  100% { background-color: transparent; transform: translateX(0); }
+}
+
+
+.result-feedback {
+  margin-top: 20px;
+}
+
+.result-feedback p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+/* Utility */
+.hidden {
+  display: none !important;
+}

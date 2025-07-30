@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>サイバー防衛ゲーム</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="start-screen" class="screen">
+      <h1>サイバー防衛ゲーム</h1>
+      <button onclick="nextScreen()">スタート</button>
+    </div>
+
+    <div id="story-screen" class="screen hidden">
+      <p>
+        あなたは情報防衛隊の一員として、街を脅かすネットの脅威に立ち向かうことになった！
+      </p>
+      <button onclick="nextScreen()">次へ</button>
+    </div>
+
+    <div id="intro-ally-screen" class="screen hidden character-screen">
+      <div class="character-display">
+        <img src="https://via.placeholder.com/150/0000FF/FFFFFF?text=教官" alt="教官キャラクター" class="character-image" />
+        <div class="status">教官 | HP: ???</div>
+      </div>
+      <div class="dialogue-area">
+        <p id="ally-dialogue"></p>
+        <button onclick="nextScreen()">次へ</button>
+      </div>
+    </div>
+
+    <div id="intro-enemy-screen" class="screen hidden character-screen">
+      <div class="character-display">
+        <img src="https://via.placeholder.com/150/FF0000/FFFFFF?text=敵キャラ" alt="敵キャラクター" class="character-image" />
+        <div class="status">敵 | HP: ???</div>
+      </div>
+      <div class="dialogue-area">
+        <p id="enemy-dialogue"></p>
+        <button onclick="startQuizLoop()">次へ</button>
+      </div>
+    </div>
+
+    <div id="quiz-screen" class="screen hidden">
+      <div class="question-area">
+        <p id="question-text">問題文</p>
+        <img id="question-image" src="" alt="問題画像" class="hidden" />
+      </div>
+      <div id="options"></div>
+      <button id="submit-btn" onclick="submitAnswer()" disabled>攻撃！</button>
+    </div>
+
+    <div id="result-screen" class="screen hidden result-animation-container">
+      <div id="battle-animation" class="battle-animation"></div>
+      <div class="result-feedback">
+        <p id="result-message"></p>
+        <p id="explanation-text"></p>
+        <button onclick="nextQuizOrEnding()">次へ</button>
+      </div>
+    </div>
+
+    <div id="ending-screen" class="screen hidden">
+      <h2>ミッション完了！</h2>
+      <p id="final-score"></p>
+      <p id="title-display"></p>
+      <div class="character-conversation-ending hidden">
+        <img src="https://via.placeholder.com/100/0000FF/FFFFFF?text=教官" alt="教官" />
+        <p>教官：「よくやった！君のおかげで街は守られたぞ！」</p>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
