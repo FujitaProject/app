@@ -156,7 +156,7 @@ git push origin feature/new-feature-name
 ```
 
 ### デザインの変更
-`style.css`で以下の要素をカスタマイズできます：
+`style.css`で以下の要素をカスタマイズできる：
 - 色合い: `background-color`, `color`プロパティ
 - フォント: `font-family`, `font-size`プロパティ  
 - レイアウト: `margin`, `padding`, `width`プロパティ
