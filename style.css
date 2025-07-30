@@ -1,93 +1,108 @@
+/* ====================
+   全体のページレイアウト
+   ==================== */
 body {
-  font-family: sans-serif;
-  text-align: center;
-  background: #f5f5f5;
+  font-family: sans-serif; /* フォントを設定 */
+  text-align: center; /* テキストを中央揃え */
+  background: #f5f5f5; /* 背景色をライトグレーに設定 */
   margin: 0;
   padding: 2em;
-  display: flex; /* Use flexbox for centering */
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh; /* Full viewport height */
+  display: flex; /* フレックスボックスレイアウトを使用 */
+  justify-content: center; /* 水平方向に中央揃え */
+  align-items: center; /* 垂直方向に中央揃え */
+  min-height: 100vh; /* 画面の高さ全体を使用 */
 }
 
+/* ====================
+   画面（スクリーン）の基本スタイル
+   ==================== */
 .screen {
-  display: none;
-  background: white;
-  padding: 2em;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: none; /* 初期状態では非表示 */
+  background: white; /* 背景色を白に設定 */
+  padding: 2em; /* 内側の余白を設定 */
+  border-radius: 8px; /* 角を丸くする */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 影をつけて立体感を演出 */
   width: 90%;
-  max-width: 600px; /* Limit screen width */
-  box-sizing: border-box; /* Include padding in width */
+  max-width: 600px; /* 最大幅を制限してレスポンシブ対応 */
+  box-sizing: border-box; /* paddingを幅に含める */
 }
 
+/* hiddenクラスがない画面は表示する */
 .screen:not(.hidden) {
   display: block;
 }
 
+/* ====================
+   テキストとボタンの基本スタイル
+   ==================== */
 h1 {
-  font-size: 2.5em;
-  color: #333;
+  font-size: 2.5em; /* タイトルのフォントサイズ */
+  color: #333; /* 濃いグレーの文字色 */
 }
 
 button {
   margin-top: 20px;
-  padding: 12px 25px;
+  padding: 12px 25px; /* ボタンの内側の余白 */
   font-size: 1.2em;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background-color: #007bff; /* 青色の背景 */
+  color: white; /* 白い文字 */
+  border: none; /* 枠線を削除 */
+  border-radius: 5px; /* 角を丸くする */
+  cursor: pointer; /* マウスオーバー時にポインターに変更 */
+  transition: background-color 0.3s ease; /* 色の変化にアニメーション効果 */
 }
 
+/* ボタンにマウスが乗った時の効果（無効でない場合のみ） */
 button:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #0056b3; /* より濃い青色に変更 */
 }
 
+/* 無効状態のボタンのスタイル */
 button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+  background-color: #ccc; /* グレーの背景色 */
+  cursor: not-allowed; /* マウスカーソルを禁止マークに変更 */
 }
 
-/* Character Screens */
+/* ====================
+   キャラクター画面のスタイル
+   ==================== */
 .character-screen {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 400px; /* Ensure sufficient height */
+  flex-direction: column; /* 縦方向にレイアウト */
+  justify-content: space-between; /* 要素を上下に分散配置 */
+  min-height: 400px; /* 最小の高さを確保 */
 }
 
 .character-display {
-  flex-grow: 1;
+  flex-grow: 1; /* 余った空間を占有 */
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* 中央揃え */
   justify-content: center;
   margin-bottom: 20px;
 }
 
 .character-image {
   max-width: 150px;
-  height: auto;
-  border-radius: 50%; /* Example: circular image */
-  border: 2px solid #ddd;
+  height: auto; /* 縦横比を保持 */
+  border-radius: 50%; /* 円形の画像にする */
+  border: 2px solid #ddd; /* グレーの枠線 */
 }
 
 .status {
   margin-top: 10px;
-  font-weight: bold;
-  color: #555;
+  font-weight: bold; /* 太字 */
+  color: #555; /* 濃いグレー */
 }
 
+/* セリフ表示エリアのスタイル */
 .dialogue-area {
-  background: #eee;
+  background: #eee; /* 薄いグレーの背景 */
   padding: 15px;
   border-radius: 5px;
-  text-align: left;
-  min-height: 80px; /* Ensure space for dialogue */
-  position: relative;
+  text-align: left; /* 左揃え */
+  min-height: 80px; /* 最小の高さを確保 */
+  position: relative; /* 子要素の絶対位置指定の基準 */
 }
 
 .dialogue-area p {
@@ -96,90 +111,103 @@ button:disabled {
   color: #333;
 }
 
+/* セリフエリア内のボタンを右下に固定配置 */
 .dialogue-area button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  position: absolute; /* 絶対位置指定 */
+  bottom: 10px; /* 下から10px */
+  right: 10px; /* 右から10px */
   margin: 0;
   padding: 8px 15px;
   font-size: 1em;
 }
 
-/* Quiz Screen */
+/* ====================
+   クイズ画面のスタイル
+   ==================== */
 .question-area {
   margin-bottom: 20px;
 }
 
+/* 問題画像のスタイル */
 #question-image {
   max-width: 100%;
   height: auto;
   margin-top: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #ddd; /* グレーの枠線 */
 }
 
+/* 選択肢ボタンの配置 */
 #options {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  flex-direction: column; /* 縦方向に並べる */
+  gap: 10px; /* ボタン間の間隔 */
 }
 
+/* 選択肢ボタンのスタイル */
 #options button {
   width: 100%;
   padding: 10px;
   font-size: 1em;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* 薄いグレーの背景 */
   color: #333;
   border: 1px solid #ddd;
   border-radius: 5px;
-  text-align: left;
+  text-align: left; /* 左揃え */
 }
 
+/* 選択された選択肢のハイライト */
 #options button.selected {
-  background-color: #a8d8ff; /* Highlight selected option */
-  border-color: #007bff;
+  background-color: #a8d8ff; /* 薄い青色でハイライト */
+  border-color: #007bff; /* 青い枠線 */
 }
 
-/* Result Screen */
+/* ====================
+   結果画面のスタイル
+   ==================== */
 .result-animation-container {
-  overflow: hidden; /* Hide overflow for animations */
+  overflow: hidden; /* アニメーションが枠外に出ないようにする */
 }
 
+/* バトルアニメーション用のエリア */
 .battle-animation {
   width: 100%;
-  height: 150px; /* Space for animation */
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  height: 150px; /* アニメーション表示用の高さ */
+  background-size: contain; /* 画像をエリア内に収める */
+  background-repeat: no-repeat; /* 画像の繰り返し表示を無効 */
+  background-position: center; /* 画像を中央に配置 */
   margin-bottom: 20px;
 }
 
-/* Animation for correct answer */
+/* 正解時のアニメーション */
 .battle-animation.attack-success {
-  background-image: url('https://via.placeholder.com/200/00FF00/FFFFFF?text=ATTACK!'); /* Example success image */
-  animation: attackEffect 0.5s ease-out forwards;
+  background-image: url('https://via.placeholder.com/200/00FF00/FFFFFF?text=ATTACK!');
+  animation: attackEffect 0.5s ease-out forwards; /* アニメーションを適用 */
 }
 
-/* Animation for incorrect answer */
+/* 不正解時のアニメーション */
 .battle-animation.damage-taken {
-  background-image: url('https://via.placeholder.com/200/FF0000/FFFFFF?text=DAMAGE!'); /* Example damage image */
+  background-image: url('https://via.placeholder.com/200/FF0000/FFFFFF?text=DAMAGE!');
   animation: damageEffect 0.5s ease-out forwards;
 }
 
+/* 攻撃成功アニメーションのキーフレーム定義 */
 @keyframes attackEffect {
-  0% { transform: scale(0.8); opacity: 0; }
-  50% { transform: scale(1.1); opacity: 1; }
-  100% { transform: scale(1); opacity: 0; }
+  0% { transform: scale(0.8); opacity: 0; } /* 小さく透明から開始 */
+  50% { transform: scale(1.1); opacity: 1; } /* 少し大きくして完全に表示 */
+  100% { transform: scale(1); opacity: 0; } /* 元のサイズに戻して透明に */
 }
 
+/* ダメージアニメーションのキーフレーム定義 */
 @keyframes damageEffect {
   0% { background-color: transparent; }
-  25% { background-color: rgba(255, 0, 0, 0.3); }
-  50% { background-color: rgba(255, 0, 0, 0.6); transform: translateX(5px); }
-  75% { background-color: rgba(255, 0, 0, 0.3); transform: translateX(-5px); }
-  100% { background-color: transparent; transform: translateX(0); }
+  25% { background-color: rgba(255, 0, 0, 0.3); } /* 薄い赤色の背景 */
+  50% { background-color: rgba(255, 0, 0, 0.6); transform: translateX(5px); } /* 濃い赤色で右に移動 */
+  75% { background-color: rgba(255, 0, 0, 0.3); transform: translateX(-5px); } /* 薄い赤色で左に移動 */
+  100% { background-color: transparent; transform: translateX(0); } /* 元の位置に戻す */
 }
 
 
+/* 結果表示部分のスタイル */
 .result-feedback {
   margin-top: 20px;
 }
@@ -189,7 +217,10 @@ button:disabled {
   margin-bottom: 10px;
 }
 
-/* Utility */
+/* ====================
+   ユーティリティクラス
+   ==================== */
+/* 要素を非表示にするためのクラス（!importantで他のスタイルを上書き） */
 .hidden {
   display: none !important;
 }
