@@ -34,7 +34,7 @@ const quizData = [
   },
   { type: "phishing",
     question: "このメールはフィッシングメールか？\n(送信元: 'amazon@phishing.com')",
-    image: "",
+    image: "", // 画像なしでもOK
     options: ["はい","いいえ","判断できない","どちらでもない"],
     answer: 0,
     explanation: "送信元が公式と異なるドメインの場合、フィッシングメールの可能性が高いです。"
@@ -84,7 +84,7 @@ function startQuizLoop(){
 }
 
 function loadQuestion(){
-  if(currentQuestionIndex >= quizData.length){ console.error("No more questions"); return; }
+  if(currentQuestionIndex >= quizData.length){ return; }
   const q = quizData[currentQuestionIndex];
 
   // タイトル/本文
@@ -92,17 +92,14 @@ function loadQuestion(){
     q.type === "phishing" ? "Which is a phishing risk?" : "Image Safety Check";
   document.getElementById("question-text").innerText = q.question;
 
-  // 画像 or プレースホルダ
+  // 画像（ないときは非表示にするだけ。プレースホルダは出さない）
   const img = document.getElementById("question-image");
-  const ph  = document.getElementById("question-illustration");
   if(q.image){
     img.src = q.image;
     img.classList.remove("hidden");
-    ph.classList.add("hidden");
   }else{
     img.src = "";
     img.classList.add("hidden");
-    ph.classList.remove("hidden");
   }
 
   // 選択肢

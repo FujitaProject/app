@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- 画面はJSのshowScreen()で切替。1つだけ非hidden -->
     <div id="start-screen" class="screen">
       <h1 class="card-title">Cyber Safety Quiz</h1>
       <p class="card-sub">画像流出とフィッシングを見抜けるか？</p>
@@ -16,9 +15,8 @@
 
     <div id="story-screen" class="screen hidden">
       <h1 class="card-title">ミッション</h1>
-      <div class="illustration">
-        <!-- シールドの簡易SVG（装飾） -->
-        <svg viewBox="0 0 120 120" aria-hidden="true">
+      <div class="illustration" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
           <rect x="10" y="18" width="100" height="64" rx="6" ry="6"/>
           <path class="shield" d="M60 38c18 0 24 6 24 6v16c0 16-12 26-24 32-12-6-24-16-24-32V44s6-6 24-6z"/>
           <rect class="bang" x="56" y="46" width="8" height="26" rx="3"/>
@@ -50,19 +48,8 @@
 
       <div class="question-area">
         <p id="question-text" class="question-text">問題文</p>
-
-        <!-- 画像がある問題用 -->
+        <!-- 画像がある問題だけ表示 -->
         <img id="question-image" src="" alt="問題画像" class="hidden"/>
-
-        <!-- 画像がない問題ではこのプレースホルダを表示 -->
-        <div id="question-illustration" class="illustration hidden" aria-hidden="true">
-          <svg viewBox="0 0 120 120">
-            <rect x="10" y="18" width="100" height="64" rx="6" ry="6"/>
-            <path class="shield" d="M60 38c18 0 24 6 24 6v16c0 16-12 26-24 32-12-6-24-16-24-32V44s6-6 24-6z"/>
-            <rect class="bang" x="56" y="46" width="8" height="26" rx="3"/>
-            <rect class="bang" x="56" y="76" width="8" height="8" rx="2"/>
-          </svg>
-        </div>
       </div>
 
       <div id="options" class="options"></div>
