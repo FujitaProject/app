@@ -1,107 +1,90 @@
 <!DOCTYPE html>
-<!-- HTML5標準のドキュメント宣言 -->
 <html lang="ja">
-  <!-- ページ全体を囲むルート要素。日本語サイトであることを指定 -->
   <head>
-    <!-- ページのメタ情報を定義するセクション -->
     <meta charset="UTF-8" />
-    <!-- 文字エンコーディングをUTF-8に設定（日本語などの多言語対応） -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- スマホやタブレット対応のためのビューポート設定 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>サイバー防衛ゲーム</title>
-    <!-- ブラウザのタブに表示されるページタイトル -->
     <link rel="stylesheet" href="style.css" />
-    <!-- 外部CSSファイルを読み込んでページのスタイルを適用 -->
   </head>
   <body>
-    <!-- ページの内容を表示するメインのセクション -->
-    <!-- ゲームのスタート画面（最初に表示される画面） -->
+    <!-- 画面はJSのshowScreen()で切替。1つだけ非hidden -->
     <div id="start-screen" class="screen">
-      <h1>サイバー防衛ゲーム</h1>
-      <!-- nextScreen()関数を呼び出してゲーム開始 -->
-      <button onclick="nextScreen()">スタート</button>
+      <h1 class="card-title">Cyber Safety Quiz</h1>
+      <p class="card-sub">画像流出とフィッシングを見抜けるか？</p>
+      <button class="primary" onclick="nextScreen()">スタート</button>
     </div>
 
-    <!-- ストーリー紹介画面（背景設定を説明） -->
     <div id="story-screen" class="screen hidden">
-      <p>
-        あなたは情報防衛隊の一員として、街を脅かすネットの脅威に立ち向かうことになった！
-      </p>
-      <button onclick="nextScreen()">次へ</button>
+      <h1 class="card-title">ミッション</h1>
+      <div class="illustration">
+        <!-- シールドの簡易SVG（装飾） -->
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <rect x="10" y="18" width="100" height="64" rx="6" ry="6"/>
+          <path class="shield" d="M60 38c18 0 24 6 24 6v16c0 16-12 26-24 32-12-6-24-16-24-32V44s6-6 24-6z"/>
+          <rect class="bang" x="56" y="46" width="8" height="26" rx="3"/>
+          <rect class="bang" x="56" y="76" width="8" height="8" rx="2"/>
+        </svg>
+      </div>
+      <p class="card-sub">教官の指示に従い、全6問をクリアせよ。</p>
+      <button class="primary" onclick="nextScreen()">次へ</button>
     </div>
 
-    <!-- 味方キャラクター（教官）の登場画面 -->
     <div id="intro-ally-screen" class="screen hidden character-screen">
-      <div class="character-display">
-        <!-- プレースホルダー画像を使って教官キャラクターを表示 -->
-        <img src="https://via.placeholder.com/150/0000FF/FFFFFF?text=教官" alt="教官キャラクター" class="character-image" />
-        <div class="status">教官 | HP: ???</div>
-      </div>
+      <h1 class="card-title">教官</h1>
       <div class="dialogue-area">
-        <!-- JavaScript側でallyDialogueの内容がここに挿入される -->
         <p id="ally-dialogue"></p>
-        <button onclick="nextScreen()">次へ</button>
+        <button class="primary" onclick="nextScreen()">次へ</button>
       </div>
     </div>
 
-    <!-- 敵キャラクターの登場画面 -->
     <div id="intro-enemy-screen" class="screen hidden character-screen">
-      <div class="character-display">
-        <!-- プレースホルダー画像を使って敵キャラクターを表示 -->
-        <img src="https://via.placeholder.com/150/FF0000/FFFFFF?text=敵キャラ" alt="敵キャラクター" class="character-image" />
-        <div class="status">敵 | HP: ???</div>
-      </div>
+      <h1 class="card-title">敵</h1>
       <div class="dialogue-area">
-        <!-- JavaScript側でenemyDialogueの内容がここに挿入される -->
         <p id="enemy-dialogue"></p>
-        <!-- startQuizLoop()を呼び出してクイズを開始 -->
-        <button onclick="startQuizLoop()">次へ</button>
+        <button class="primary" onclick="startQuizLoop()">始める</button>
       </div>
     </div>
 
-    <!-- クイズ画面（メインのゲーム画面） -->
     <div id="quiz-screen" class="screen hidden">
+      <h1 class="card-title" id="card-heading">問題</h1>
+
       <div class="question-area">
-        <!-- JavaScript側で動的に問題文が挿入される -->
-        <p id="question-text">問題文</p>
-        <!-- 問題に画像がある場合はここに表示される -->
-        <img id="question-image" src="" alt="問題画像" class="hidden" />
+        <p id="question-text" class="question-text">問題文</p>
+
+        <!-- 画像がある問題用 -->
+        <img id="question-image" src="" alt="問題画像" class="hidden"/>
+
+        <!-- 画像がない問題ではこのプレースホルダを表示 -->
+        <div id="question-illustration" class="illustration hidden" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <rect x="10" y="18" width="100" height="64" rx="6" ry="6"/>
+            <path class="shield" d="M60 38c18 0 24 6 24 6v16c0 16-12 26-24 32-12-6-24-16-24-32V44s6-6 24-6z"/>
+            <rect class="bang" x="56" y="46" width="8" height="26" rx="3"/>
+            <rect class="bang" x="56" y="76" width="8" height="8" rx="2"/>
+          </svg>
+        </div>
       </div>
-      <!-- 選択肢のボタンがJavaScript側で動的に生成される -->
-      <div id="options"></div>
-      <!-- 答えを提出するボタン。選択肢を選ぶまではdisabled状態 -->
-      <button id="submit-btn" onclick="submitAnswer()" disabled>攻撃！</button>
+
+      <div id="options" class="options"></div>
+      <button id="submit-btn" class="primary wide" onclick="submitAnswer()" disabled>回答する</button>
     </div>
 
-    <!-- 回答結果表示画面（正解・不正解とアニメーションを表示） -->
     <div id="result-screen" class="screen hidden result-animation-container">
-      <!-- バトルアニメーション用のエリア（CSS animations使用） -->
       <div id="battle-animation" class="battle-animation"></div>
       <div class="result-feedback">
-        <!-- 正解・不正解のメッセージが表示される -->
         <p id="result-message"></p>
-        <!-- 問題の解説が表示される -->
-        <p id="explanation-text"></p>
-        <!-- 次の問題またはエンディングに進む -->
-        <button onclick="nextQuizOrEnding()">次へ</button>
+        <p id="explanation-text" class="explain"></p>
+        <button class="primary wide" onclick="nextQuizOrEnding()">次へ</button>
       </div>
     </div>
 
-    <!-- エンディング画面（全問題終了後に表示） -->
     <div id="ending-screen" class="screen hidden">
-      <h2>ミッション完了！</h2>
-      <!-- 最終スコアが表示される -->
-      <p id="final-score"></p>
-      <!-- スコアに応じた称号が表示される -->
-      <p id="title-display"></p>
-      <!-- 満点の場合は特別な会話が表示される（現在は非表示） -->
-      <div class="character-conversation-ending hidden">
-        <img src="https://via.placeholder.com/100/0000FF/FFFFFF?text=教官" alt="教官" />
-        <p>教官：「よくやった！君のおかげで街は守られたぞ！」</p>
-      </div>
+      <h1 class="card-title">ミッション完了！</h1>
+      <p id="final-score" class="score"></p>
+      <p id="title-display" class="title"></p>
+      <button class="secondary" onclick="location.reload()">もう一度</button>
     </div>
 
-    <!-- JavaScriptファイルを読み込んでゲームの機能を有効化 -->
     <script src="script.js"></script>
   </body>
 </html>
